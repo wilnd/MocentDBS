@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <!--自定义flume日志级别-->
+    <!--<CustomLevels>-->
+        <!--<CustomLevel name="FLUME" intLevel="88" />-->
+    <!--</CustomLevels>-->
+    <!--定义输出日志的地方-->
+    <Appenders>
+        <!--控制台输出-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-7level %logger{36} - %msg%n"/>
+        </Console>
+        <!--log文件输出-->
+        <File name="MyFile" fileName="logs/app.log">
+            <PatternLayout pattern="%d %-7level %logger{36} - %msg%n"/>
+        </File>
+        <!--输出到flume-->
+        <!--<Flume name="eventLogger" compress="false">-->
+            <!--<Agent host="192.168.1.111" port="41414"/>-->
+            <!--&lt;!&ndash;输出方式为json&ndash;&gt;-->
+            <!--<JSONLayout/>-->
+        <!--</Flume>-->
+    </Appenders>
+    <!--配置不同的日志级别输出到不同地点-->
+    <Loggers>
+        <!--root代表默认日志级别-->
+        <Root level="error">
+            <!--设定flume级别及以上的日志通过flume-appender输出-->
+            <!--<AppenderRef ref="eventLogger" level="FLUME" />-->
+            <!--设定console级别及以上的日志通过控制台输出-->
+            <AppenderRef ref="Console" level="info" />
+            <!--设定error及以上的日志通过log文件输出-->
+            <AppenderRef ref="MyFile" level="error" />
+        </Root>
+    </Loggers>
+</Configuration>

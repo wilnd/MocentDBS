@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-autowire="byName">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:*.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- aspectj aop启用CGliB代理 -->
+    <aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true"/>
+    <!--向 Spring 容器注册
+    AutowiredAnnotationBeanPostProcessor（@Autowired  默认按照类型装配的 对类成员变量、方法及构造函数进行标注，完成自动装配的工作。@Autowired   private Car car）、
+    CommonAnnotationBeanPostProcessor（@ Resource 功能同@Autowired默认是按照名称来装配注入，、@ PostConstruct、 @ PreDestroy）、
+    PersistenceAnnotationBeanPostProcessor （@PersistenceContext）
+    RequiredAnnotationBeanPostProcessor（@Required @Required注解检查 但他只检查属性是否已经设置） 这 4 个BeanPostProcessor。-->
+    <!--如果用<context:annotation-config/>，我们还需要配置Xml注册Bean-->
+    <context:annotation-config/>
+    <!-- 扫描service -->
+    <!--使用<context:component-scan />的话，注册的步骤都免了，当然前提是我们对需要扫描的类使用的注解（比如@Componet,@Service）-->
+    <context:component-scan base-package="com.mocent"/>
+
+    <import resource="classpath:spring/spring-shiro.xml"/>
+    <import resource="classpath:spring/spring-mybatis.xml"/>
+    <import resource="classpath:spring/spring-ehcache.xml"/>
+</beans>
