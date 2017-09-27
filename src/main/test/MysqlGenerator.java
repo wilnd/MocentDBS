@@ -47,7 +47,7 @@ public class MysqlGenerator {
 		gc.setEnableCache(false);// XML 二级缓存
 		gc.setBaseResultMap(true);// XML ResultMap
 		gc.setBaseColumnList(false);// XML columList
-		gc.setAuthor("zhixuan.wang");
+		gc.setAuthor("hadoop");
 
 		// 自定义文件命名，注意 %s 会自动填充表实体属性！
 		gc.setMapperName("%sMapper");

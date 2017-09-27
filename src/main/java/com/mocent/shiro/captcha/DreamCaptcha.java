@@ -16,7 +16,7 @@ import java.util.UUID;
 
 /**
  * 如梦验证码
- * @author L.cm
+ * @author hadoop
  *
  */
 public class DreamCaptcha implements InitializingBean {
